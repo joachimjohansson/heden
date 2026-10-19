@@ -17,6 +17,6 @@ En responsiv, statisk webbplats som kan publiceras direkt med GitHub Pages. Den 
 - Öppna/stänger-meddelandet räknar efter svensk tid (`Europe/Stockholm`).
 - Menyn är transkriberad från `Pizzor.htm` och `Kebab & Falafel.htm` som användaren bifogade.
 - Menykorten öppnar lokala sektioner för pizza, kebab/falafel och sallader.
-- Rubriker använder Archivo och övrig text Source Sans 3 via Google Fonts.
+- Bricolage Grotesque används genomgående: brödtext 400/18 px, H1/H2 500 och H3/H4 600.
 
 Menyfilerna har en sidfot med copyright 2014. Priserna visas som de står i de bifogade filerna; kontrollera gärna att prislistan fortfarande gäller innan demot går live. Originalsidans färgvärden gick inte att hämta, så färgerna är en varm, pizzeriaanpassad tolkning.
