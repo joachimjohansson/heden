@@ -4,10 +4,11 @@ En responsiv, statisk webbplats som kan publiceras direkt med GitHub Pages. Den 
 
 ## Publicera demot på GitHub Pages
 
-1. Skapa ett nytt GitHub-repo och ladda upp filerna i den här mappen till repo-roten.
-2. Öppna **Settings → Pages** i repot.
-3. Under **Build and deployment**, välj **Deploy from a branch**, välj `main` och `/ (root)` och spara.
-4. GitHub visar demo-adressen i Pages-inställningarna när publiceringen är klar.
+Filerna ligger i repo-roten i [`joachimjohansson/heden`](https://github.com/joachimjohansson/heden). För att slå på demot:
+
+1. Öppna **Settings → Pages** i repot.
+2. Under **Build and deployment**, välj **Deploy from a branch**, välj `main` och `/ (root)` och spara.
+3. GitHub visar demo-adressen i Pages-inställningarna när publiceringen är klar.
 
 ## Innehåll och uppgifter
 
@@ -20,3 +21,4 @@ En responsiv, statisk webbplats som kan publiceras direkt med GitHub Pages. Den 
 - Bricolage Grotesque används genomgående: brödtext 400/18 px, H1/H2 500 och H3/H4 600.
 
 Menyfilerna har en sidfot med copyright 2014. Priserna visas som de står i de bifogade filerna; kontrollera gärna att prislistan fortfarande gäller innan demot går live. Originalsidans färgvärden gick inte att hämta, så färgerna är en varm, pizzeriaanpassad tolkning.
+
