@@ -11,3 +11,6 @@ body{font-size:16px}
 .menu-card h3,.hours-title h3{font-size:27px}
 @media(max-width:620px){.menu-toggle{width:auto;height:auto;padding:8px 14px;border-radius:99px;font:400 16px var(--body);color:var(--ink)}.menu-toggle span{display:none}}
 
+
+/* Ensure older cached eyebrow markup uses ordinary body text. */
+.eyebrow{font:inherit;letter-spacing:normal;color:inherit;text-transform:none}.eyebrow-dot{display:none}
