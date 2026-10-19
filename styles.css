@@ -9,3 +9,5 @@ h3,h4{font-family:var(--display);font-weight:600}
 body{font-size:16px}
 .intro,.button,.address-line,.main-nav,.status-title,.status-subtitle,.info-card b,.all-menus-link,.menu-card p,.menu-note,.visit-copy p,.hours-row,.hours-row b,.closing-note,.footer{font-size:16px}
 .menu-card h3,.hours-title h3{font-size:27px}
+@media(max-width:620px){.menu-toggle{width:auto;height:auto;padding:8px 14px;border-radius:99px;font:400 16px var(--body);color:var(--ink)}.menu-toggle span{display:none}}
+
