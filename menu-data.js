@@ -35,7 +35,7 @@ window.HEDENS_MENU = {
     ]}
   ],
   kebab: [
-    { category: 'Kebab och kyckling', items: [
+    { category: 'Kebab eller kyckling', items: [
       ['','Kebab i pitabröd','Pitabröd, kebabkött, färsk tomat, isbergssallad, feferoni, gurka, lök, kebabsås',119],['','Kebabrulle','Tunnbröd, kebabkött, färsk tomat, isbergssallad, feferoni, gurka, lök, kebabsås',129],['','Kycklingrulle','Tunnbröd, kyckling, färsk tomat, isbergssallad, feferoni, gurka, lök, kebabsås',129],['','Kebabtallrik','Pommes frites, kebabkött, färska tomater, isbergssallad, feferoni, gurka, lök, kebabsås',129],['','Kycklingtallrik','Pommes frites, kyckling, färska tomater, isbergssallad, feferoni, gurka, lök, kebabsås',120]
     ]},
     { category: 'Falafel', items: [
