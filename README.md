@@ -19,5 +19,7 @@ Filerna ligger i repo-roten i [`joachimjohansson/heden`](https://github.com/joac
 - Menyn är transkriberad från `Pizzor.htm` och `Kebab & Falafel.htm` som användaren bifogade.
 - Menykorten öppnar lokala sektioner för pizza, kebab/falafel och sallader.
 - Bricolage Grotesque används genomgående: brödtext 400/16 px, H1/H2 500, H3 27 px/600 och H4 20 px/600. Ikoner är borttagna från knappar och länkar.
+- På mobilmenyn ligger kategorierna kvar högst upp och en fast, klickbar ringknapp visas längst ner.
 
 Menyfilerna har en sidfot med copyright 2014. Priserna visas som de står i de bifogade filerna; kontrollera gärna att prislistan fortfarande gäller innan demot går live. Originalsidans färgvärden gick inte att hämta, så färgerna är en varm, pizzeriaanpassad tolkning.
+
