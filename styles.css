@@ -6,3 +6,6 @@ h1,h2{font-family:var(--display);font-weight:500}
 h3,h4{font-family:var(--display);font-weight:600}
 .hero h1,.section-heading h2,.visit-copy h2{font-weight:500}
 .menu-card h3,.hours-title h3,.menu-group>h3,.dish-heading h4{font-weight:600}
+body{font-size:16px}
+.intro,.button,.address-line,.main-nav,.status-title,.status-subtitle,.info-card b,.all-menus-link,.menu-card p,.menu-note,.visit-copy p,.hours-row,.hours-row b,.closing-note,.footer{font-size:16px}
+.menu-card h3,.hours-title h3{font-size:27px}
