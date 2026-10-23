@@ -111,8 +111,11 @@ h1, h2, h3 {
   transition: transform 0.2s, background 0.2s;
 }
 
-.button:hover {
-  transform: translateY(-2px);
+/* Lyft bara på enheter med muspekare (på telefon fastnar hovringen efter ett tryck) */
+@media (hover: hover) {
+  .button:hover {
+    transform: translateY(-2px);
+  }
 }
 
 /* Den som valt minskad rörelse i sitt system slipper lyften och den mjuka scrollningen */
@@ -463,9 +466,11 @@ body::before {
   transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.menu-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 30px #1d2d271a;
+@media (hover: hover) {
+  .menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px #1d2d271a;
+  }
 }
 
 .menu-pizza { background: var(--card-pizza); }

@@ -106,15 +106,24 @@
   transition: transform 0.2s, background 0.2s, color 0.2s;
 }
 
-.menu-tabs-main a:hover,
+/* Vald flik i rubrikernas mörkgröna färg */
 .menu-tabs-main a.active {
-  background: var(--ink);
+  background: var(--heading);
   color: white;
 }
 
-/* Samma lyft som knapparna på startsidan */
-.menu-tabs-main a:hover {
-  transform: translateY(-2px);
+/* Hovring bara på enheter med muspekare. På en telefon "fastnar" hovringen
+   på fliken man tryckt på, så att den lyfts och flikraden hoppar. */
+@media (hover: hover) {
+  .menu-tabs-main a:hover {
+    background: var(--heading);
+    color: white;
+    transform: translateY(-2px);   /* samma lyft som knapparna på startsidan */
+  }
+
+  .menu-tabs-sub a:hover {
+    color: var(--ink);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -135,10 +144,6 @@
   transition: color 0.2s, text-decoration-color 0.2s;
 }
 
-.menu-tabs-sub a:hover {
-  color: var(--ink);
-}
-
 .menu-tabs-sub a.active {
   color: var(--tomato);
   text-decoration-color: currentColor;
@@ -154,7 +159,12 @@
 }
 
 /* Hopp till en rubrik landar under flikraden (höjden sätts av menu.js) */
-.food-section,
+/* Menydelarna landar precis under flikraden, så att flikraden alltid ligger
+   högst upp oavsett vilken del man hoppar till (annars hoppar den vid "Pizza") */
+.food-section {
+  scroll-margin-top: var(--tabs-height, 110px);
+}
+
 .menu-group {
   scroll-margin-top: calc(var(--tabs-height, 110px) + 12px);
 }
