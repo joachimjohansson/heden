@@ -218,7 +218,7 @@ h1, h2, h3 {
    så att sidrubriken hamnar exakt lika på startsidan och menysidan */
 .hero-copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;               /* texten ligger ovanpå pizzan om de möts */
   align-self: start;
   padding: 38px 0 26px;
 }
@@ -307,7 +307,8 @@ body::before {
   z-index: 1;
   width: min(100%, 570px);
   height: auto;
-  transform: rotate(-4deg);
+  /* Pizzans plats justeras per skärmstorlek med --pizza-x och --pizza-y */
+  transform: translate(var(--pizza-x, 0), var(--pizza-y, 20px)) rotate(-4deg);
   filter: drop-shadow(0 22px 18px color-mix(in srgb, #493d27 24%, transparent));
 }
 
@@ -816,7 +817,9 @@ body::before {
   }
 
   .pizza-art {
-    width: min(100%, 290px);
+    --pizza-x: 30px;          /* snett upp åt höger, får gå ut över kanten */
+    --pizza-y: -14px;         /* längre upp krockar med adressraden */
+    width: min(100%, 334px);
   }
 
   /* Snabbinfon behövs inte på mobilen: status, telefon och adress står redan
