@@ -4,13 +4,50 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f1e7">
-  <meta name="description" content="Hedens Pizzeria på Wadmansgatan 4 i Göteborg. Ring oss och se dagens öppettider.">
-  <title>Hedens Pizzeria — Göteborg</title>
+  <title>Hedens Pizzeria — pizza, kebab och falafel i Göteborg</title>
+  <meta name="description" content="Hedens Pizzeria på Wadmansgatan 4 i Göteborg. Pizza, kebab, falafel och sallader. Ring 031-20 70 95 och beställ.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="sv_SE">
+  <meta property="og:site_name" content="Hedens Pizzeria">
+  <meta property="og:title" content="Hedens Pizzeria — Göteborg">
+  <meta property="og:description" content="Pizza, kebab, falafel och sallader på Wadmansgatan 4 i Göteborg. Ring 031-20 70 95.">
+  <meta property="og:url" content="https://joachimjohansson.github.io/heden/">
+  <meta property="og:image" content="https://joachimjohansson.github.io/heden/assets/dela.png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020-clean-hero">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261023">
+  <script src="app.js?v=20261023" defer></script>
+
+  <!-- Uppgifter till Google (adress, telefon, öppettider).
+       Ändras öppettiderna: uppdatera både här och i öppettidskortet längre ner. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Hedens Pizzeria",
+    "url": "https://joachimjohansson.github.io/heden/",
+    "image": "https://joachimjohansson.github.io/heden/assets/dela.png",
+    "telephone": "+46 31 20 70 95",
+    "servesCuisine": ["Pizza", "Kebab", "Falafel"],
+    "priceRange": "110–149 kr",
+    "hasMenu": "https://joachimjohansson.github.io/heden/menu.html",
+    "acceptsReservations": false,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Wadmansgatan 4",
+      "postalCode": "412 53",
+      "addressLocality": "Göteborg",
+      "addressCountry": "SE"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "11:00", "closes": "21:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "11:00", "closes": "22:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "21:00" }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="topbar">
@@ -19,29 +56,31 @@
       <span>Hedens<br><b>PIZZERIA</b></span>
     </a>
     <nav class="main-nav" aria-label="Huvudmeny">
-      <a href="#menyer">Menyer</a>
+      <a href="menu.html">Meny</a>
       <a href="#hitta-hit">Hitta hit</a>
       <a class="nav-phone" href="tel:+4631207095">Ring 031–20 70 95</a>
     </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Meny</button>
     <nav id="mobile-nav" class="mobile-nav" aria-label="Mobilmeny">
-      <a href="#menyer">Menyer</a><a href="#hitta-hit">Hitta hit</a><a href="tel:+4631207095">Ring 031–20 70 95</a>
+      <a href="menu.html">Hela menyn</a>
+      <a href="#hitta-hit">Hitta hit</a>
+      <a href="tel:+4631207095">Ring 031–20 70 95</a>
     </nav>
   </header>
 
   <main id="hem">
     <section class="hero">
       <div class="hero-copy">
-        <div >Din favorit i Göteborg</div>
-        <h1>Gott, enkelt<br><em>Heden.</em></h1>
-        <p class="intro">Nybakad pizza, kebab eller sallad — mitt i stan, alltid redo när hungern slår till.</p>
+        <p class="eyebrow">Din favorit i Göteborg</p>
+        <h1>Pizzeria <em>Heden</em></h1>
+        <p class="intro">Nybakad pizza, kebab, falafel och sallader — mitt i stan, alltid redo när hungern slår till.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#menyer">Utforska menyn</a>
+          <a class="button button-primary" href="menu.html">Se menyn</a>
           <a class="button button-phone" href="tel:+4631207095">031–20 70 95</a>
         </div>
-        <div class="address-line"><span aria-hidden="true">⌖</span> Wadmansgatan 4, Göteborg</div>
+        <p class="address-line"><span aria-hidden="true">⌖</span> Wadmansgatan 4, Göteborg</p>
       </div>
-      <div class="hero-art" aria-label="Illustration av nygräddad pizza">
+      <div class="hero-art">
         <img class="pizza-art" src="assets/pizza2.svg" alt="Tecknad pizza med pepperoni, paprika, oliver och basilika">
       </div>
     </section>
@@ -49,35 +88,78 @@
     <section class="quick-info" aria-label="Öppettider och kontakt">
       <div class="status-card">
         <span class="status-icon" aria-hidden="true">◷</span>
-        <div><div id="open-status" class="status-title">Kollar öppettider …</div><div id="today-hours" class="status-subtitle">Dagens öppettider</div></div>
+        <div>
+          <div id="open-status" class="status-title">Se öppettider nedan</div>
+          <div id="today-hours" class="status-subtitle">Dagens öppettider</div>
+        </div>
         <span id="open-dot" class="live-dot" aria-hidden="true"></span>
       </div>
-      <a class="info-card" href="tel:+4631207095"><span><span class="info-label">Beställ eller fråga</span><b>031–20 70 95</b></span></a>
-      <a class="info-card" href="https://maps.google.com/?q=Wadmansgatan+4,+412+53+Göteborg" target="_blank" rel="noreferrer"><span><span class="info-label">Du hittar oss på</span><b>Wadmansgatan 4</b></span></a>
+      <a class="info-card" href="tel:+4631207095">
+        <span><span class="info-label">Beställ eller fråga</span><b>031–20 70 95</b></span>
+      </a>
+      <a class="info-card" href="https://maps.google.com/?q=Wadmansgatan+4,+412+53+Göteborg" target="_blank" rel="noreferrer">
+        <span><span class="info-label">Du hittar oss på</span><b>Wadmansgatan 4</b></span>
+      </a>
     </section>
 
     <section class="menu-section" id="menyer">
-      <div class="section-heading"><div><div >Vad är du sugen på?</div><h2>Välj din favorit<span class="tomato-dot">.</span></h2></div><a class="all-menus-link" href="menu.html">Se hela menyn</a></div>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Vad är du sugen på?</p>
+          <h2>Välj din favorit<span class="tomato-dot">.</span></h2>
+        </div>
+        <a class="all-menus-link" href="menu.html">Se hela menyn</a>
+      </div>
       <div class="menu-grid">
-        <a class="menu-card menu-pizza" href="menu.html#pizza" aria-label="Visa pizzamenyn på Hedens Pizzeria">
-          <div class="menu-number">01</div><img class="food-illustration" src="assets/pizza.svg" alt=""><div class="menu-card-bottom"><span><h3>Pizza</h3><p>Klassiker och specialare</p></span></div>
+        <a class="menu-card menu-pizza" href="menu.html#pizza" aria-label="Visa pizzamenyn">
+          <div class="menu-number">01</div>
+          <img class="food-illustration" src="assets/pizza.svg" alt="">
+          <div class="menu-card-bottom"><span><h3>Pizza</h3><p>Klassiker och specialare</p></span></div>
         </a>
-        <a class="menu-card menu-kebab" href="menu.html#kebab" aria-label="Visa kebabmenyn på Hedens Pizzeria">
-          <div class="menu-number">02</div><img class="food-illustration" src="assets/kebabtallrik.svg" alt=""><div class="menu-card-bottom"><span><h3>Kebab</h3><p>Rulle, tallrik och mer</p></span></div>
+        <a class="menu-card menu-kebab" href="menu.html#kebab" aria-label="Visa menyn för kebab och falafel">
+          <div class="menu-number">02</div>
+          <img class="food-illustration" src="assets/kebabtallrik.svg" alt="">
+          <div class="menu-card-bottom"><span><h3>Kebab &amp; falafel</h3><p>Rulle, tallrik och pitabröd</p></span></div>
         </a>
-        <a class="menu-card menu-salad" href="menu.html#sallad" aria-label="Visa salladsmenyn på Hedens Pizzeria">
-          <div class="menu-number">03</div><img class="food-illustration" src="assets/sallad.svg" alt=""><div class="menu-card-bottom"><span><h3>Sallader</h3><p>Fräscht och mättande</p></span></div>
+        <a class="menu-card menu-salad" href="menu.html#sallad" aria-label="Visa salladsmenyn">
+          <div class="menu-number">03</div>
+          <img class="food-illustration" src="assets/sallad.svg" alt="">
+          <div class="menu-card-bottom"><span><h3>Sallader</h3><p>Fräscht och mättande</p></span></div>
         </a>
       </div>
       <p class="menu-note">Se alla rätter och priser på vår menysida.</p>
     </section>
 
     <section class="visit-section" id="hitta-hit">
-      <div class="visit-copy"><div >Mitt i Göteborg</div><h2>Vi ses på Heden<span class="tomato-dot">.</span></h2><p>Sväng förbi på lunch, middag eller när du bara är sugen på något riktigt gott.</p><a class="text-link" href="https://maps.google.com/?q=Wadmansgatan+4,+412+53+Göteborg" target="_blank" rel="noreferrer">Hitta vägen</a></div>
-      <div class="hours-card"><div class="hours-title"><span class="hours-clock" aria-hidden="true">◷</span><h3>Öppettider</h3></div><div class="hours-row" data-day="1"><span>Måndag – torsdag</span><b>11.00 – 21.30</b></div><div class="hours-row" data-day="5"><span>Fredag – lördag</span><b>11.00 – 22.00</b></div><div class="hours-row" data-day="0"><span>Söndag</span><b>12.00 – 21.00</b></div><div id="closing-note" class="closing-note">Stänger idag kl. 21.30</div></div>
+      <div class="visit-copy">
+        <p class="eyebrow">Mitt i Göteborg</p>
+        <h2>Vi ses på Heden<span class="tomato-dot">.</span></h2>
+        <p>Sväng förbi på lunch, middag eller när du bara är sugen på något riktigt gott.</p>
+        <a class="text-link" href="https://maps.google.com/?q=Wadmansgatan+4,+412+53+Göteborg" target="_blank" rel="noreferrer">Hitta vägen</a>
+      </div>
+
+      <!-- ÖPPETTIDER — det här är stället att ändra dem på.
+           data-days: veckodagar som raden gäller (1 = måndag … 6 = lördag, 0 = söndag).
+           Tiden skrivs som "11.00 – 21.30"; app.js läser den och räknar ut "Öppet just nu".
+           data-closed: dagar då ni håller stängt, t.ex. "2026-12-24, 2026-12-25".
+           Glöm inte att även uppdatera öppettiderna för Google högst upp i filen. -->
+      <div class="hours-card" data-closed="">
+        <div class="hours-title"><span class="hours-clock" aria-hidden="true">◷</span><h3>Öppettider</h3></div>
+        <div class="hours-row" data-days="1,2,3,4"><span>Måndag – torsdag</span><b>11.00 – 21.30</b></div>
+        <div class="hours-row" data-days="5,6"><span>Fredag – lördag</span><b>11.00 – 22.00</b></div>
+        <div class="hours-row" data-days="0"><span>Söndag</span><b>12.00 – 21.00</b></div>
+        <div id="closing-note" class="closing-note"></div>
+      </div>
     </section>
   </main>
-  <footer class="footer"><a class="brand footer-brand" href="#hem"><span class="brand-mark" aria-hidden="true">H</span><span>Hedens<br><b>PIZZERIA</b></span></a><span>Wadmansgatan 4 · 412 53 Göteborg</span><a href="tel:+4631207095">031–20 70 95</a><span>© <span id="year"></span> Hedens Pizzeria</span></footer>
+
+  <a class="mobile-call-bar" href="tel:+4631207095">Ring 031–20 70 95</a>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#hem"><span class="brand-mark" aria-hidden="true">H</span><span>Hedens<br><b>PIZZERIA</b></span></a>
+    <span>Wadmansgatan 4 · 412 53 Göteborg</span>
+    <a href="tel:+4631207095">031–20 70 95</a>
+    <span>© <span class="year">2026</span> Hedens Pizzeria</span>
+  </footer>
 </body>
 </html>
-

@@ -1,25 +1,41 @@
 # Hedens Pizzeria — demo
 
-En responsiv, statisk webbplats som kan publiceras direkt med GitHub Pages. Den använder ingen byggkedja eller server.
+En responsiv, statisk webbplats som publiceras direkt med GitHub Pages. Ingen byggkedja eller server behövs.
 
-## Publicera demot på GitHub Pages
-
-Filerna ligger i repo-roten i [`joachimjohansson/heden`](https://github.com/joachimjohansson/heden). För att slå på demot:
+## Publicera på GitHub Pages
 
 1. Öppna **Settings → Pages** i repot.
 2. Under **Build and deployment**, välj **Deploy from a branch**, välj `main` och `/ (root)` och spara.
-3. GitHub visar demo-adressen i Pages-inställningarna när publiceringen är klar.
 
-## Innehåll och uppgifter
+När sidan ska ersätta pizzeriaheden.se: lägg till domänen under **Settings → Pages → Custom domain** och peka om DNS hos domänleverantören. Byt då även adressen `https://joachimjohansson.github.io/heden/` i `og:`-taggarna och i Google-uppgifterna (JSON-LD) i `index.html` och `menu.html`.
 
-- Telefonlänk: `031–20 70 95` (`tel:+4631207095`)
-- Adress: Wadmansgatan 4, 412 53 Göteborg
-- Öppettider: mån–tors 11.00–21.30, fre–lör 11.00–22.00, sön 12.00–21.00.
-- Öppna/stänger-meddelandet räknar efter svensk tid (`Europe/Stockholm`).
-- Menyn är transkriberad från `Pizzor.htm` och `Kebab & Falafel.htm` som användaren bifogade.
-- Menykorten öppnar lokala sektioner för pizza, kebab/falafel och sallader.
-- Bricolage Grotesque används genomgående: brödtext 400/16 px, H1/H2 500, H3 27 px/600 och H4 20 px/600. Ikoner är borttagna från knappar och länkar.
-- På mobilmenyn ligger kategorierna kvar högst upp och en fast, klickbar ringknapp visas längst ner.
+## Filer
 
-Menyfilerna har en sidfot med copyright 2014. Priserna visas som de står i de bifogade filerna; kontrollera gärna att prislistan fortfarande gäller innan demot går live. Originalsidans färgvärden gick inte att hämta, så färgerna är en varm, pizzeriaanpassad tolkning.
+| Fil | Vad den gör |
+| --- | --- |
+| `index.html` | Startsidan |
+| `menu.html` | Hela menyn med priser |
+| `styles.css` | Gemensam stil. Färger, typsnitt och mått står överst. |
+| `menu.css` | Extra stil för menysidan |
+| `app.js` | "Öppet just nu" och mobilmenyn på startsidan |
+| `menu.js` | Räknar rätterna i flikarna och markerar var på menyn man är |
+| `assets/` | Illustrationer, favicon och `dela.png` (bilden som visas när länken delas) |
 
+## Vanliga ändringar
+
+**Ändra eller lägga till en rätt:** öppna `menu.html` och leta upp rätten. Varje rätt är ett `<article class="dish-card">`. Kopiera ett befintligt kort för att lägga till en ny. Antalet i flikarna uppdateras av sig självt.
+
+**Ny kategori på menyn:** lägg till en `<section class="menu-group" id="...">` och en länk med samma `#id` i flikraden (`menu-tabs-sub`) högst upp i `menu.html`.
+
+**Öppettider:** ändra dem i öppettidskortet i `index.html` (se kommentaren där). "Öppet just nu" räknas ut från samma rader. Uppdatera även `openingHoursSpecification` högst upp i filen, så att Google visar rätt tider.
+
+**Stängda dagar (helgdagar, semester):** skriv datumen i `data-closed` på öppettidskortet, t.ex. `data-closed="2026-12-24, 2026-12-25"`. Då visar sidan "Stängt idag" de dagarna.
+
+**Färger:** ändra variablerna i avsnitt 1 överst i `styles.css`.
+
+## Att kontrollera med pizzerian
+
+- Nr 14 och nr 44 heter båda "Mozzarella" och har samma ingredienser. Nr 41 "Inbakad Calzone" har också samma ingredienser.
+- Kycklingtallrik kostar 120 kr, kebabtallrik 129 kr.
+- Familjepizza nämns i glutentexten men finns inte på menyn.
+- Dryck, tillbehör och eventuell utkörning saknas.

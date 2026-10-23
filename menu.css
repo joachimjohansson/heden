@@ -1,8 +1,300 @@
-.menu-page{min-height:100vh}.menu-home-link{display:none}.menu-hero{padding:62px 24px 33px;text-align:left}.menu-hero h1{font:500 clamp(56px,8vw,82px)/1 var(--display);letter-spacing:0;margin:13px 0}.menu-hero>p{font-size:18px;color:#58645e;margin:0}.menu-callout{font-size:18px;color:var(--muted);margin:17px auto 0}.menu-callout a{color:var(--tomato);font-weight:500}.menu-tabs{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:8px;padding:12px 16px;background:#f6f1e7ee;backdrop-filter:blur(12px);border-top:1px solid #e6dfd2;border-bottom:1px solid #e6dfd2}.menu-tabs a{padding:10px 17px;border-radius:99px;color:#536058;font-size:18px;font-weight:400;transition:background .2s,color .2s}.menu-tabs a:hover,.menu-tabs a.active{background:var(--ink);color:white}.menu-tabs span{font-size:14px;opacity:.7;padding-left:5px}.menu-content{max-width:1208px;margin:auto;padding:0 28px 74px}.food-section{padding-top:57px;scroll-margin-top:64px}.food-section-heading{margin-bottom:23px}.food-section-heading h2{font:500 40px/1.1 var(--display);letter-spacing:0;margin:8px 0}.food-section-heading p{color:var(--muted);margin:0;font-size:18px}.menu-group{margin-top:27px}.menu-group>h3{font:600 20px/1.25 var(--display);letter-spacing:0;padding-bottom:11px;margin:0 0 11px;border-bottom:1px solid var(--line)}.dish-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px}.dish-card{min-width:0;padding:14px 0 15px;border-bottom:1px solid #e9e3d8}.dish-heading{display:flex;align-items:baseline;gap:9px}.dish-heading h4{font:600 18px/1.25 var(--display);margin:0;letter-spacing:0}.dish-number{color:var(--tomato);font:400 18px var(--body);min-width:18px}.dish-price{margin-left:auto;white-space:nowrap;color:var(--tomato);font:500 18px var(--display)}.dish-card p{color:#667168;font:400 18px/1.45 var(--body);margin:5px 0 0}.footer{border-top:1px solid var(--line)}@media(max-width:680px){.menu-page .main-nav{display:none}.menu-home-link{display:block;font-size:18px;font-weight:400;color:var(--tomato)}.menu-hero{padding:44px 20px 27px}.menu-hero h1{font-size:61px}.menu-hero>p{font-size:18px}.menu-tabs{justify-content:flex-start;overflow-x:auto;white-space:nowrap;scrollbar-width:none}.menu-tabs::-webkit-scrollbar{display:none}.menu-tabs a{padding:9px 13px;font-size:16px}.menu-content{padding:0 21px 55px}.food-section{padding-top:43px;scroll-margin-top:59px}.food-section-heading h2{font-size:34px}.food-section-heading p{font-size:18px}.dish-grid{grid-template-columns:1fr}.menu-group>h3{font-size:18px}.dish-card{padding:13px 0}.dish-heading h4{font-size:18px}.dish-price{font-size:18px}}
-.menu-page{font-size:16px}
-.menu-hero>p,.menu-callout,.menu-tabs a,.food-section-heading p,.dish-card p,.menu-home-link{font-size:16px}
-.menu-group>h3{font-size:27px}
-.dish-heading h4{font-size:20px}
-.mobile-call-bar{display:none}
-@media(max-width:680px){.menu-page{padding-bottom:calc(84px + env(safe-area-inset-bottom))}.mobile-call-bar{position:fixed;left:16px;right:16px;bottom:max(12px,env(safe-area-inset-bottom));z-index:10;display:flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:99px;background:var(--tomato);color:#fff;font:500 16px/1.3 var(--body);box-shadow:0 6px 18px #1d2d2730}}
+/* ==========================================================================
+   Hedens Pizzeria — tillägg för menysidan (menu.html)
+   Färger, typsnitt och mått kommer från styles.css (avsnitt 1).
 
+   Innehåll
+   1. Sidans topp
+   2. Flikarna (fastnar högst upp när man scrollar)
+   3. Menyn: kategorier och rätter
+   4. Mobil (max 620 px bred)
+   ========================================================================== */
+
+
+/* 1. Sidans topp
+   -------------------------------------------------------------------------- */
+.menu-page {
+  min-height: 100vh;
+}
+
+/* Länken "Startsidan" ersätter navigeringen på mobilen, se avsnitt 4 */
+.menu-home-link {
+  display: none;
+}
+
+.menu-hero {
+  max-width: var(--content-width);
+  margin: auto;
+  padding: 62px 28px 33px;
+}
+
+.menu-hero h1 {
+  margin: 13px 0;
+  font-size: clamp(56px, 8vw, 82px);
+  line-height: 1;
+}
+
+.menu-hero p {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.menu-hero .eyebrow {
+  color: var(--ink);
+}
+
+.menu-hero .menu-callout {
+  margin-top: 17px;
+  color: var(--muted);
+}
+
+.menu-callout a {
+  color: var(--tomato);
+  font-weight: 500;
+}
+
+
+/* 2. Flikarna (fastnar högst upp när man scrollar)
+   Översta raden: Pizza / Kebab & falafel / Sallader.
+   Raden under: underkategorierna för den del man tittar på.
+   -------------------------------------------------------------------------- */
+.menu-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 12px 16px 10px;
+  background: #f6f1e7ee;
+  border-top: 1px solid #e6dfd2;
+  border-bottom: 1px solid #e6dfd2;
+  backdrop-filter: blur(12px);
+}
+
+.menu-tabs-main,
+.menu-tabs-sub {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Raderna med underkategorier ligger ovanpå varandra och bara en syns åt gången.
+   Då behåller flikraden samma höjd och sidan hoppar inte när man byter del. */
+.menu-tabs-subs {
+  display: grid;
+  margin-top: 8px;
+}
+
+.menu-tabs-sub {
+  grid-area: 1 / 1;
+  flex-wrap: wrap;           /* på stor skärm bryts raden om den inte får plats */
+}
+
+.menu-tabs-sub[hidden] {
+  display: flex;
+  visibility: hidden;
+}
+
+/* Huvudflikarna */
+.menu-tabs-main a {
+  padding: 10px 17px;
+  border-radius: 99px;
+  color: #536058;
+  transition: background 0.2s, color 0.2s;
+}
+
+.menu-tabs-main a:hover,
+.menu-tabs-main a.active {
+  background: var(--ink);
+  color: white;
+}
+
+/* Antal rätter, t.ex. "62" */
+.tab-count {
+  padding-left: 5px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Underflikarna: mindre och ljusare */
+.menu-tabs-sub a {
+  padding: 6px 13px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: #536058;
+  font-size: 14px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.menu-tabs-sub a:hover,
+.menu-tabs-sub a.active {
+  border-color: var(--tomato);
+  color: var(--tomato);
+}
+
+.menu-tabs-sub a.active {
+  background: var(--white);
+}
+
+
+/* 3. Menyn: kategorier och rätter
+   -------------------------------------------------------------------------- */
+.menu-content {
+  max-width: var(--content-width);
+  margin: auto;
+  padding: 0 28px 74px;
+}
+
+/* Hopp till en rubrik landar under flikraden (höjden sätts av menu.js) */
+.food-section,
+.menu-group {
+  scroll-margin-top: calc(var(--tabs-height, 110px) + 12px);
+}
+
+.food-section {
+  padding-top: 57px;
+}
+
+.food-section-heading {
+  margin-bottom: 23px;
+}
+
+.food-section-heading h2 {
+  margin: 8px 0;
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+.food-section-heading p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* En kategori, t.ex. "Köttfärspizzor" */
+.menu-group {
+  margin-top: 27px;
+}
+
+.menu-group > h3 {
+  margin: 0 0 11px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--line);
+  font-size: 27px;
+  line-height: 1.25;
+}
+
+/* Rätterna ligger i två kolumner på stor skärm */
+.dish-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 30px;
+}
+
+/* En rätt: nummer, namn och pris på en rad, ingredienser under */
+.dish-card {
+  min-width: 0;
+  padding: 14px 0 15px;
+  border-bottom: 1px solid #e9e3d8;
+}
+
+.dish-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.dish-number {
+  min-width: 18px;
+  color: var(--tomato);
+  font-size: 18px;
+}
+
+.dish-heading h4 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.dish-price {
+  margin-left: auto;
+  color: var(--tomato);
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.dish-card p {
+  margin: 5px 0 0;
+  color: #667168;
+  line-height: 1.45;
+}
+
+.menu-page .footer {
+  border-top: 1px solid var(--line);
+}
+
+
+/* 4. Mobil (max 620 px bred)
+   -------------------------------------------------------------------------- */
+@media (max-width: 620px) {
+  .menu-page .main-nav {
+    display: none;
+  }
+
+  .menu-home-link {
+    display: block;
+    color: var(--tomato);
+  }
+
+  .menu-hero {
+    padding: 44px 20px 27px;
+  }
+
+  .menu-hero h1 {
+    font-size: 61px;
+  }
+
+  .menu-tabs {
+    padding: 10px 12px 8px;
+  }
+
+  /* På mobilen ligger flikarna på en rad som man sveper i sidled */
+  .menu-tabs-main,
+  .menu-tabs-sub {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .menu-tabs-main::-webkit-scrollbar,
+  .menu-tabs-sub::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu-tabs-main {
+    gap: 6px;
+  }
+
+  .menu-tabs-main a {
+    padding: 9px 10px;
+  }
+
+  .menu-content {
+    padding: 0 21px 55px;
+  }
+
+  .food-section {
+    padding-top: 43px;
+  }
+
+  .food-section-heading h2 {
+    font-size: 34px;
+  }
+
+  .dish-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dish-card {
+    padding: 13px 0;
+  }
+}
