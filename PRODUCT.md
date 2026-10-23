@@ -44,7 +44,7 @@ A neighbourhood pizzeria on Heden in central Göteborg. It has a long, numbered 
 - **Google and sharing:**
   - schema.org `Restaurant` data
   - Open Graph tags
-  - share image (`assets/dela.png`)
+  - share image (`assets/dela.jpg`)
   - favicon
 - **Changing hours:** hours appear in two places in `index.html`, the visible hours card and the JSON-LD. Both must be updated together.
 - **Grundsajt:** this site is also the first customer of the "grundsajt" template (`../grundsajt`), which builds sites like this one from a config file. This PRODUCT.md covers only Hedens; the template is a separate product.

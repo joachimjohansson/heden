@@ -16,21 +16,14 @@
   min-height: 100vh;
 }
 
-/* Länken "Startsidan" ersätter navigeringen på mobilen, se avsnitt 4 */
-.menu-home-link {
-  display: none;
-}
-
+/* Rubrikens storlek och avståndet ovanför den står i styles.css (avsnitt 4),
+   tillsammans med startsidans rubrik, så att de alltid är lika */
 .menu-hero {
-  max-width: var(--content-width);
+  max-width: var(--page-width);   /* samma bredd och kantavstånd som startsidan */
   margin: auto;
-  padding: 62px 28px 33px;
-}
-
-.menu-hero h1 {
-  margin: 13px 0;
-  font-size: clamp(56px, 8vw, 82px);
-  line-height: 1;
+  padding-right: var(--page-padding);
+  padding-bottom: 33px;
+  padding-left: var(--page-padding);
 }
 
 .menu-hero p {
@@ -47,8 +40,9 @@
   color: var(--muted);
 }
 
+/* Mörkare röd, eftersom länken ligger ovanpå svepet */
 .menu-callout a {
-  color: var(--tomato);
+  color: var(--tomato-dark);
   font-weight: 500;
 }
 
@@ -62,9 +56,16 @@
   top: 0;
   z-index: 5;
   padding: 12px 16px 10px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+/* Flikraden är genomskinlig över svepet och får bakgrund först när den
+   fastnat högst upp (klassen sätts av menu.js) */
+.menu-tabs.is-stuck {
   background: #f6f1e7ee;
-  border-top: 1px solid #e6dfd2;
-  border-bottom: 1px solid #e6dfd2;
+  border-color: #e6dfd2;
   backdrop-filter: blur(12px);
 }
 
@@ -86,6 +87,9 @@
 .menu-tabs-sub {
   grid-area: 1 / 1;
   flex-wrap: wrap;           /* på stor skärm bryts raden om den inte får plats */
+  align-items: center;       /* länkarna sträcks inte ut till den högsta radens höjd */
+  align-content: flex-start;
+  gap: 2px 6px;
 }
 
 .menu-tabs-sub[hidden] {
@@ -98,7 +102,8 @@
   padding: 10px 17px;
   border-radius: 99px;
   color: #536058;
-  transition: background 0.2s, color 0.2s;
+  font-weight: 600;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
 }
 
 .menu-tabs-main a:hover,
@@ -107,40 +112,45 @@
   color: white;
 }
 
-/* Antal rätter, t.ex. "62" */
-.tab-count {
-  padding-left: 5px;
-  font-size: 14px;
-  opacity: 0.7;
+/* Samma lyft som knapparna på startsidan */
+.menu-tabs-main a:hover {
+  transform: translateY(-2px);
 }
 
-/* Underflikarna: mindre och ljusare */
+@media (prefers-reduced-motion: reduce) {
+  .menu-tabs-main a:hover {
+    transform: none;
+  }
+}
+
+/* Underflikarna: bara text. Den valda blir röd och understruken. */
 .menu-tabs-sub a {
-  padding: 6px 13px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  color: #536058;
-  font-size: 14px;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  padding: 9px 10px;         /* osynlig luft runt texten gör dem lätta att trycka på */
+  color: var(--text-soft);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  transition: color 0.2s, text-decoration-color 0.2s;
 }
 
-.menu-tabs-sub a:hover,
+.menu-tabs-sub a:hover {
+  color: var(--ink);
+}
+
 .menu-tabs-sub a.active {
-  border-color: var(--tomato);
   color: var(--tomato);
-}
-
-.menu-tabs-sub a.active {
-  background: var(--white);
+  text-decoration-color: currentColor;
 }
 
 
 /* 3. Menyn: kategorier och rätter
    -------------------------------------------------------------------------- */
 .menu-content {
-  max-width: var(--content-width);
+  max-width: var(--page-width);   /* linjerar med rubriken ovanför */
   margin: auto;
-  padding: 0 28px 74px;
+  padding: 0 var(--page-padding) 74px;
 }
 
 /* Hopp till en rubrik landar under flikraden (höjden sätts av menu.js) */
@@ -235,21 +245,8 @@
 /* 4. Mobil (max 620 px bred)
    -------------------------------------------------------------------------- */
 @media (max-width: 620px) {
-  .menu-page .main-nav {
-    display: none;
-  }
-
-  .menu-home-link {
-    display: block;
-    color: var(--tomato);
-  }
-
   .menu-hero {
-    padding: 44px 20px 27px;
-  }
-
-  .menu-hero h1 {
-    font-size: 61px;
+    padding-bottom: 27px;
   }
 
   .menu-tabs {
@@ -271,7 +268,7 @@
   }
 
   .menu-tabs-main {
-    gap: 6px;
+    gap: 2px;
   }
 
   .menu-tabs-main a {
@@ -279,7 +276,7 @@
   }
 
   .menu-content {
-    padding: 0 21px 55px;
+    padding-bottom: 55px;
   }
 
   .food-section {

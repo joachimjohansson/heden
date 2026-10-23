@@ -17,13 +17,13 @@ När sidan ska ersätta pizzeriaheden.se: lägg till domänen under **Settings �
 | `menu.html` | Hela menyn med priser |
 | `styles.css` | Gemensam stil. Färger, typsnitt och mått står överst. |
 | `menu.css` | Extra stil för menysidan |
-| `app.js` | "Öppet just nu" och mobilmenyn på startsidan |
-| `menu.js` | Räknar rätterna i flikarna och markerar var på menyn man är |
-| `assets/` | Illustrationer, favicon och `dela.png` (bilden som visas när länken delas) |
+| `app.js` | Öppetstatusen på startsidan, t.ex. "Öppet nu · stänger 22.00 på fredagar" |
+| `menu.js` | Markerar var på menyn man är i flikraden |
+| `assets/` | Matfoton, favicon och `dela.jpg` (bilden som visas när länken delas) |
 
 ## Vanliga ändringar
 
-**Ändra eller lägga till en rätt:** öppna `menu.html` och leta upp rätten. Varje rätt är ett `<article class="dish-card">`. Kopiera ett befintligt kort för att lägga till en ny. Antalet i flikarna uppdateras av sig självt.
+**Ändra eller lägga till en rätt:** öppna `menu.html` och leta upp rätten. Varje rätt är ett `<article class="dish-card">`. Kopiera ett befintligt kort för att lägga till en ny.
 
 **Ny kategori på menyn:** lägg till en `<section class="menu-group" id="...">` och en länk med samma `#id` i flikraden (`menu-tabs-sub`) högst upp i `menu.html`.
 

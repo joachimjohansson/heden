@@ -1,4 +1,4 @@
-// Startsidan: "Öppet just nu", mobilmenyn och årtalet i sidfoten.
+// Startsidan: "Öppet just nu" och årtalet i sidfoten.
 // Öppettiderna läses från öppettidskortet i index.html, så de behöver bara ändras där.
 (() => {
   const dayNames = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'];
@@ -35,26 +35,38 @@
   };
   const hoursFor = (date) => (closedDates.includes(date.iso) ? null : schedule[date.day]);
 
-  // Nästa dag då vi har öppet, t.ex. "imorgon kl. 11.00" eller "måndag kl. 11.00".
-  const nextOpening = () => {
+  // Nästa dag då vi har öppet: veckodag, tid och om det är imorgon.
+  const nextOpenDay = () => {
     for (let offset = 1; offset <= 14; offset += 1) {
       const date = swedishDate(offset);
       const hours = hoursFor(date);
-      if (hours) return `${offset === 1 ? 'imorgon' : dayNames[date.day]} kl. ${format(hours.open)}`;
+      if (hours) return { day: date.day, open: hours.open, tomorrow: offset === 1 };
     }
     return null;
   };
+  // T.ex. "imorgon kl. 11.00" eller "måndag kl. 11.00"
+  const nextOpening = () => {
+    const next = nextOpenDay();
+    return next && `${next.tomorrow ? 'imorgon' : dayNames[next.day]} kl. ${format(next.open)}`;
+  };
+  // "fredag" -> "fredagar"
+  const onDays = (day) => `på ${dayNames[day]}ar`;
 
   const status = document.getElementById('open-status');
   const todayHours = document.getElementById('today-hours');
   const dot = document.getElementById('open-dot');
   const closingNote = document.getElementById('closing-note');
+  const heroStatus = document.getElementById('hero-status-text');
+  const heroDot = document.getElementById('hero-dot');
 
-  const show = (title, subtitle, note, isOpen) => {
+  // heroText är den korta raden under rubriken på mobilen.
+  const show = (title, subtitle, note, isOpen, heroText) => {
     status.textContent = title;
     todayHours.textContent = subtitle;
     closingNote.textContent = note;
+    heroStatus.textContent = heroText;
     dot.classList.toggle('is-open', isOpen);
+    heroDot.classList.toggle('is-open', isOpen);
   };
 
   const renderHours = () => {
@@ -62,27 +74,23 @@
     const today = hoursFor(now);
     rows.forEach((row) => row.classList.toggle('is-today', schedule[now.day].row === row));
     const next = nextOpening();
+    const nextDay = nextOpenDay();
 
+    // Sista texten i varje show() är raden under rubriken, t.ex. "Öppet nu · stänger 22.00 på fredagar".
     if (!today) {
-      show('Stängt idag', next ? `Öppnar ${next}` : '', 'Vi håller stängt idag.', false);
+      show('Stängt idag', next ? `Öppnar ${next}` : '', 'Vi håller stängt idag.', false,
+        next ? `Stängt idag · öppnar ${next}` : 'Stängt idag');
     } else if (now.minute < today.open) {
-      show(`Öppnar idag kl. ${format(today.open)}`, `Öppet idag ${format(today.open)}–${format(today.close)}`, `Stänger idag kl. ${format(today.close)}`, false);
+      show(`Öppnar idag kl. ${format(today.open)}`, `Öppet idag ${format(today.open)}–${format(today.close)}`, `Stänger idag kl. ${format(today.close)}`, false,
+        `Stängt nu · öppnar ${format(today.open)} ${onDays(now.day)}`);
     } else if (now.minute < today.close) {
-      show('Öppet just nu', `Stänger idag kl. ${format(today.close)}`, `Stänger idag kl. ${format(today.close)}`, true);
+      show('Öppet nu', `Stänger ${format(today.close)} ${onDays(now.day)}`, `Stänger idag kl. ${format(today.close)}`, true,
+        `Öppet nu · stänger ${format(today.close)} ${onDays(now.day)}`);
     } else {
-      show(next ? `Öppnar ${next}` : 'Stängt', `Stängde idag kl. ${format(today.close)}`, `Stängde idag kl. ${format(today.close)}`, false);
+      show(next ? `Öppnar ${next}` : 'Stängt', `Stängde idag kl. ${format(today.close)}`, `Stängde idag kl. ${format(today.close)}`, false,
+        nextDay ? `Stängt nu · öppnar ${format(nextDay.open)} ${onDays(nextDay.day)}` : 'Stängt');
     }
   };
-
-  // Mobilmenyn
-  const toggle = document.querySelector('.menu-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-  const setMenu = (open) => {
-    toggle.setAttribute('aria-expanded', String(open));
-    mobileNav.classList.toggle('is-visible', open);
-  };
-  toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
-  mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
 
   document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
   renderHours();
