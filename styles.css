@@ -44,7 +44,11 @@
 
   /* Typsnitt */
   --font: "Bricolage Grotesque", system-ui, sans-serif;
-  --text-size: 16px;
+  --text-size: 17px;     /* brödtext och loggans namn */
+  --h2-size: 45px;
+  --h3-size: 28px;
+  --h4-size: 22px;
+  --symbol-size: 20px;   /* alla symboler: ◷, ⌖ och "H" i loggan */
 
   /* Mått */
   --page-width: 1320px;    /* max bredd på sidhuvud, topp och sidfot */
@@ -79,7 +83,7 @@ a {
 
 h1, h2 {
   font-family: var(--font);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 0.98;
 }
 
@@ -97,6 +101,7 @@ h1, h2, h3 {
 /* Liten överrubrik ovanför stora rubriker, t.ex. "Din favorit i Göteborg" */
 .eyebrow {
   margin: 0;
+  font-weight: 600;
 }
 
 /* Runda knappar */
@@ -164,11 +169,8 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   gap: 11px;
-  font: 600 13px/1.03 var(--font);
-}
-
-.brand b {
-  font-size: 12px;
+  font: 600 var(--text-size)/1.2 var(--font);
+  white-space: nowrap;
 }
 
 .brand-mark {
@@ -179,7 +181,7 @@ h1, h2, h3 {
   border-radius: 50%;
   background: var(--tomato);
   color: #fff9e8;
-  font: 600 20px var(--font);
+  font: 600 var(--symbol-size) var(--font);
 }
 
 .main-nav {
@@ -197,7 +199,7 @@ h1, h2, h3 {
 .text-link,
 .all-menus-link {
   color: var(--tomato);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 4px;
@@ -260,13 +262,7 @@ h1, h2, h3 {
 .address-line {
   margin: 24px 0 0;
   color: var(--muted);
-}
-
-.address-line span {
-  margin-right: 7px;
-  color: var(--tomato);
-  font-size: 19px;
-  vertical-align: -1px;
+  font-weight: 600;
 }
 
 /* Pizzabilden med en ljus cirkel bakom */
@@ -355,7 +351,7 @@ body::before {
   border-radius: 50%;
   background: var(--icon-bg);
   color: var(--olive);
-  font-size: 22px;
+  font-size: var(--symbol-size);
 }
 
 .status-title {
@@ -438,7 +434,7 @@ body::before {
 
 .section-heading h2 {
   margin: 10px 0 0;
-  font-size: 45px;
+  font-size: var(--h2-size);
 }
 
 .all-menus-link {
@@ -498,7 +494,7 @@ body::before {
 
 .menu-card h3 {
   margin: 0 0 5px;
-  font-size: 27px;
+  font-size: var(--h3-size);
   line-height: 1;
 }
 
@@ -527,7 +523,7 @@ body::before {
 
 .visit-copy h2 {
   margin: 12px 0;
-  font-size: 43px;
+  font-size: var(--h2-size);
 }
 
 .visit-copy p {
@@ -558,7 +554,7 @@ body::before {
 
 .hours-title h3 {
   margin: 0;
-  font-size: 27px;
+  font-size: var(--h3-size);
 }
 
 .hours-clock {
@@ -569,7 +565,7 @@ body::before {
   border-radius: 50%;
   background: var(--icon-bg);
   color: var(--olive);
-  font-size: 19px;
+  font-size: var(--symbol-size);
 }
 
 .hours-row {
@@ -591,7 +587,7 @@ body::before {
 /* Dagens rad markeras */
 .hours-row.is-today span {
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .hours-row.is-today b {
@@ -623,7 +619,7 @@ body::before {
 
 .footer > a:not(.brand) {
   color: var(--ink);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Röd "Ring"-knapp som ligger fast längst ner på mobilen, se avsnitt 10 */
@@ -729,14 +725,6 @@ body::before {
     height: 70px;
   }
 
-  .brand {
-    font-size: 12px;
-  }
-
-  .brand b {
-    font-size: 11px;
-  }
-
   .brand-mark {
     width: 34px;
     height: 34px;
@@ -787,7 +775,7 @@ body::before {
     align-items: center;
     gap: 9px;
     min-height: 44px;          /* lagom stor att trycka på; leder till öppettiderna */
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .intro {
@@ -813,7 +801,7 @@ body::before {
   }
 
   .hero-art {
-    height: 210px;
+    height: 230px;
     margin-top: 18px;
   }
 
@@ -821,10 +809,10 @@ body::before {
     --swoosh-height: 660px;
   }
 
+  /* Pizzan ligger rakt och mitt på sidan */
   .pizza-art {
-    --pizza-x: 30px;          /* snett upp åt höger, får gå ut över kanten */
-    --pizza-y: -14px;         /* längre upp krockar med adressraden */
     width: min(100%, 334px);
+    transform: none;
   }
 
   /* Snabbinfon behövs inte på mobilen: status, telefon och adress står redan
@@ -845,7 +833,7 @@ body::before {
 
   .section-heading h2,
   .visit-copy h2 {
-    font-size: 35px;
+    font-size: var(--h2-size);
   }
 
   .all-menus-link {

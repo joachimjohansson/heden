@@ -43,7 +43,7 @@
 /* Mörkare röd, eftersom länken ligger ovanpå svepet */
 .menu-callout a {
   color: var(--tomato-dark);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 
@@ -179,7 +179,7 @@
 
 .food-section-heading h2 {
   margin: 8px 0;
-  font-size: 40px;
+  font-size: var(--h2-size);
   line-height: 1.1;
 }
 
@@ -197,7 +197,7 @@
   margin: 0 0 11px;
   padding-bottom: 11px;
   border-bottom: 1px solid var(--line);
-  font-size: 27px;
+  font-size: var(--h3-size);
   line-height: 1.25;
 }
 
@@ -229,7 +229,7 @@
 
 .dish-heading h4 {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--h4-size);
   line-height: 1.25;
 }
 
@@ -237,7 +237,7 @@
   margin-left: auto;
   color: var(--tomato);
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -294,7 +294,7 @@
   }
 
   .food-section-heading h2 {
-    font-size: 34px;
+    font-size: var(--h2-size);
   }
 
   .dish-grid {
