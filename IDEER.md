@@ -36,3 +36,25 @@ Att fota eller skicka en PDF av menyn och låta ett skript eller en AI läsa av 
 - Vem äger kalkylarket, vi eller kunden?
 - Ska ändringar publiceras direkt eller en gång per natt?
 - Behövs samma sak för öppettiderna? De står i dag i `index.html` på två ställen.
+
+---
+
+## Panel för att justera typsnitten
+
+**Gäller:** Grundsajt
+**Status:** Idé, inte påbörjad
+
+### Idén
+En panel direkt på sajten där man kan välja typsnitt från Google Fonts och ställa in bredd, vikt och storlek separat för h1, h2, h3, h4 och brödtext. Ändringarna syns direkt på sidan.
+
+### Hur den kan fungera
+- **Bara för oss, inte för besökare:** panelen visas bara när man lägger till `?tweak` i adressen. Besökare ser den aldrig, och den laddas inte för dem.
+- **CSS-variabler:** varje nivå får sina egna variabler, till exempel `--h1-font`, `--h1-weight`, `--h1-width` och `--h1-size`. Panelen ändrar variablerna och sidan uppdateras direkt.
+- **Hämta typsnitten vid behov:** panelen laddar bara det typsnitt man väljer från Google Fonts, inte hela katalogen.
+- **Spara resultatet:** en knapp "Kopiera inställningar" ger ett stycke som klistras in i grundsajtens konfigurationsfil. Panelen sparar ingenting själv, så den publicerade sajten ändras bara när man medvetet för in värdena.
+
+### Saker att tänka på
+- **Bredd fungerar bara för en del typsnitt.** Bredden kräver variabla typsnitt med en `wdth`-axel, till exempel Roboto Flex, Archivo eller Anybody. För andra typsnitt ska reglaget vara avstängt.
+- **Vikterna skiljer sig mellan typsnitt.** Reglaget bör bara erbjuda vikter som typsnittet har, annars fejkar webbläsaren fetstil.
+- **Risk för för många storlekar.** Heden har just minskat antalet teckenstorlekar, enligt DESIGN.md. Panelen kan låsa storlekarna till en skala, så att man väljer en grundstorlek och ett förhållande i stället för fritt för varje nivå.
+- **Prestanda:** varje extra typsnitt och vikt gör sidan långsammare. Panelen kan visa hur många filer som laddas.
