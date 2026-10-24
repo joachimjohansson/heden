@@ -1,4 +1,4 @@
-// Menysidan: markerar var på menyn man är.
+// Menysidan: markerar var på menyn man är och låter markeringen glida mellan flikarna.
 // Själva menyn står direkt i menu.html, så den syns även om skriptet inte laddas.
 (() => {
   const tabBar = document.querySelector('.menu-tabs');
@@ -6,6 +6,26 @@
   const subRows = [...document.querySelectorAll('.menu-tabs-sub')];
   const sections = [...document.querySelectorAll('.food-section')];
   const groups = [...document.querySelectorAll('.menu-group')];
+
+  // Den gröna markeringen bakom den valda huvudfliken. Den glider mellan
+  // flikarna i stället för att hoppa, så att bytet mellan delarna syns.
+  const mainRow = document.querySelector('.menu-tabs-main');
+  const pill = document.createElement('span');
+  pill.className = 'tab-pill';
+  pill.setAttribute('aria-hidden', 'true');
+  mainRow.prepend(pill);
+  tabBar.classList.add('has-pill');
+
+  const placePill = () => {
+    const tab = mainTabs.find((t) => t.classList.contains('active'));
+    if (!tab) return;
+    pill.style.width = `${tab.offsetWidth}px`;
+    pill.style.transform = `translateX(${tab.offsetLeft}px)`;
+    // På mobilen rullar raden i sidled så att den valda fliken syns helt.
+    if (mainRow.scrollWidth > mainRow.clientWidth) {
+      mainRow.scrollTo({ left: tab.offsetLeft - (mainRow.clientWidth - tab.offsetWidth) / 2, behavior: 'smooth' });
+    }
+  };
 
   // Visa rätt rad med underkategorier och markera aktiv flik.
   // aria-current talar om för skärmläsare vilken flik som är vald.
@@ -16,11 +36,21 @@
   };
 
   let current = '';
+  let currentSection = '';
   const setActive = (sectionId, groupId) => {
     current = groupId;
+    const sectionChanged = sectionId !== currentSection;
+    currentSection = sectionId;
     mainTabs.forEach((tab) => mark(tab, tab.dataset.section === sectionId));
+    placePill();
     subRows.forEach((row) => {
       row.hidden = row.dataset.section !== sectionId;
+      // Den nya raden tonar fram, men inte när sidan laddas.
+      if (sectionChanged && !row.hidden && pill.classList.contains('is-placed')) {
+        row.classList.remove('is-entering');
+        void row.offsetWidth;   // starta om animationen om man byter snabbt
+        row.classList.add('is-entering');
+      }
       row.querySelectorAll('a').forEach((link) => {
         const isActive = link.hash === `#${groupId}`;
         mark(link, isActive);
@@ -71,10 +101,20 @@
 
   // Flikraden kan bli högre på smala skärmar; låt hopp till rubriker landa under den.
   const setOffset = () => document.documentElement.style.setProperty('--tabs-height', `${tabBar.offsetHeight}px`);
-  window.addEventListener('resize', setOffset);
+  window.addEventListener('resize', () => { setOffset(); placePill(); });
+  subRows.forEach((row) => row.addEventListener('animationend', () => row.classList.remove('is-entering')));
   setOffset();
   setStuck();
   update();
+
+  // Markeringen hamnar på plats utan animation när sidan laddas, och glider
+  // först därefter. Typsnittet kan ändra flikarnas bredd när det laddats.
+  void pill.offsetWidth;   // låt läget slå igenom innan glidningen slås på
+  pill.classList.add('is-placed');
+  document.fonts?.ready.then(placePill);
+
+  // Safari på iPhone visar bara trycket (:active) om sidan lyssnar på touch.
+  document.addEventListener('touchstart', () => {}, { passive: true });
 
   document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
 })();

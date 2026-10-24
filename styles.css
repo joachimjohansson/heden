@@ -123,7 +123,24 @@ h1, h2, h3 {
   }
 }
 
-/* Den som valt minskad rörelse i sitt system slipper lyften och den mjuka scrollningen */
+/* Ett lätt tryck bekräftar att man har tryckt, samma som flikarna på menysidan.
+   Ringknappen längst ner på mobilen är bredare och trycks därför in lite mindre. */
+.button:active {
+  transform: scale(0.95);
+  transition-duration: 0.08s;
+}
+
+.mobile-call-bar {
+  transition: transform 0.12s ease-out, background 0.2s;
+}
+
+.mobile-call-bar:active {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
+/* Den som valt minskad rörelse i sitt system slipper lyften och den mjuka
+   scrollningen. Trycket syns då som en kort toning i stället. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -132,6 +149,12 @@ h1, h2, h3 {
   .button:hover,
   .menu-card:hover {
     transform: none;
+  }
+
+  .button:active,
+  .mobile-call-bar:active {
+    transform: none;
+    opacity: 0.75;
   }
 }
 

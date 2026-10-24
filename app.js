@@ -95,4 +95,7 @@
   document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
   renderHours();
   setInterval(renderHours, 60_000);
+
+  // Safari på iPhone visar bara trycket på knapparna (:active) om sidan lyssnar på touch.
+  document.addEventListener('touchstart', () => {}, { passive: true });
 })();

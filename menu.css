@@ -98,12 +98,48 @@
 }
 
 /* Huvudflikarna */
+.menu-tabs-main {
+  position: relative;        /* den gröna markeringen placeras i raden */
+}
+
 .menu-tabs-main a {
+  position: relative;
+  z-index: 1;                /* texten ligger över den gröna markeringen */
   padding: 10px 17px;
   border-radius: 99px;
   color: #536058;
   font-weight: 600;
-  transition: transform 0.2s, background 0.2s, color 0.2s;
+  transition: transform 0.12s ease-out, background 0.2s, color 0.25s;
+}
+
+/* Ett lätt tryck bekräftar att man har valt fliken */
+.menu-tabs-main a:active,
+.menu-tabs-sub a:active {
+  transform: scale(0.95);
+  transition-duration: 0.08s;
+}
+
+/* Den gröna markeringen: en enda platta som glider till den valda fliken,
+   så att man ser att menyn går från t.ex. Pizza till Kebab när man skrollar.
+   Den skapas av menu.js; utan skript får den valda fliken egen bakgrund. */
+.tab-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--heading);
+  pointer-events: none;
+}
+
+.tab-pill.is-placed {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.has-pill .menu-tabs-main a.active {
+  background: transparent;
 }
 
 /* Vald flik i rubrikernas mörkgröna färg */
@@ -126,9 +162,43 @@
   }
 }
 
+/* Raden med underkategorier tonar fram när man byter del av menyn */
+.menu-tabs-sub.is-entering {
+  animation: sub-row-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes sub-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Med reducerad rörelse byter markeringen plats utan att glida och raden
+   tonar bara fram. Färgbytet och trycket finns kvar som bekräftelse. */
 @media (prefers-reduced-motion: reduce) {
   .menu-tabs-main a:hover {
     transform: none;
+  }
+
+  .menu-tabs-main a:active,
+  .menu-tabs-sub a:active {
+    transform: none;
+    opacity: 0.75;
+  }
+
+  .tab-pill.is-placed {
+    transition: none;
+  }
+
+  .menu-tabs-sub.is-entering {
+    animation-name: sub-row-fade;
+  }
+
+  @keyframes sub-row-fade {
+    from {
+      opacity: 0;
+    }
   }
 }
 
