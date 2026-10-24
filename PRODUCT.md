@@ -57,7 +57,7 @@ A neighbourhood pizzeria on Heden in central Göteborg. It has a long, numbered 
 
 ## Brand Commitments
 
-- **Name:** "Hedens Pizzeria". The start page headline is "Pizzeria Heden", chosen by the site's author.
+- **Name:** "Hedens Pizzeria", everywhere including the start page headline (set on two lines: "Hedens" / "Pizzeria").
 - **Contact details:** phone 031-20 70 95 and address Wadmansgatan 4, 412 53 Göteborg must stay exactly as given.
 - **Menu:** dish numbers and names as transcribed from the restaurant's own menu (with spelling corrected, e.g. Margherita, Quattro Stagioni, Sorrento).
 

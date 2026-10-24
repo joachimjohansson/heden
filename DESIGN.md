@@ -110,7 +110,7 @@ Tätheten är måttlig: luftig i toppen där besökaren bestämmer sig, tät och
 Varm italiensk kökspalett: tomat, oliv och mjöl, med dämpade jordtoner för korten.
 
 ### Primary
-- **San Marzano** (#bc4734): knappar, priser, rätternas nummer, textlänkar och "Heden" i rubriken. Allt som betyder "gör något" eller "kostar något".
+- **San Marzano** (#bc4734): knappar, priser, rätternas nummer, textlänkar och "Pizzeria" i rubriken. Allt som betyder "gör något" eller "kostar något".
 - **San Marzano mörk** (#9d3829): hovring på knappar och länkar som ligger på svepet.
 
 ### Secondary
@@ -140,7 +140,7 @@ Varm italiensk kökspalett: tomat, oliv och mjöl, med dämpade jordtoner för k
 **Character:** En vänlig grotesk med lite egen personlighet i de stora graderna, som en handmålad skylt; neutral och lättläst i brödtext.
 
 ### Hierarchy
-- **Display** (600, clamp(62px, 7vw, 93px), 0.98; 68px på mobil): "Pizzeria Heden" och "Menyn". Bara en per sida.
+- **Display** (600, clamp(62px, 7vw, 93px), 0.98; 68px på mobil): "Hedens Pizzeria" (två rader) och "Menyn". Bara en per sida.
 - **Headline** (600, 45px, 0.98): sektionsrubriker, även på mobil.
 - **Title** (600, 28px, 1): menykort, öppettider och menygrupper.
 - **Dish** (600, 22px, 1.25): rätternas namn i menyn.

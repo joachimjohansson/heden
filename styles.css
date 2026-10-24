@@ -251,7 +251,7 @@ h1, h2, h3 {
   padding: 38px 0 26px;
 }
 
-/* Sidrubriken: "Pizzeria Heden" och "Menyn" ska se exakt likadana ut.
+/* Sidrubriken: "Hedens Pizzeria" och "Menyn" ska se exakt likadana ut.
    .menu-hero får därför samma avstånd ovanför som .hero + .hero-copy (28 + 38 px). */
 .hero h1,
 .menu-hero h1 {
@@ -263,7 +263,7 @@ h1, h2, h3 {
   padding-top: 66px;
 }
 
-/* "Heden" i rubriken blir röd */
+/* "Pizzeria" i rubriken blir röd */
 .hero h1 em {
   font-style: normal;
   color: var(--tomato);
