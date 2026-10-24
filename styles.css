@@ -793,12 +793,22 @@ body::before {
     padding-top: 28px;       /* som startsidan */
   }
 
+  /* Öppetstatusen på två rader, t.ex. "Öppet nu." och "Stänger 22.00 på lördagar",
+     med den färgade pricken i höjd med första raden */
   .hero-status {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 9px;
     min-height: 44px;          /* lagom stor att trycka på; leder till öppettiderna */
     font-weight: 600;
+  }
+
+  .hero-status .status-dot {
+    margin-top: 8px;           /* mitt på första raden (radhöjd 25,5 px) */
+  }
+
+  #hero-status-text span {
+    display: block;
   }
 
   .intro {

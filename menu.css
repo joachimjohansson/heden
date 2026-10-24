@@ -329,6 +329,11 @@
     padding-bottom: 27px;
   }
 
+  /* Allergiraden på två rader: frågan först, telefonnumret under */
+  .menu-callout a {
+    display: block;
+  }
+
   .menu-tabs {
     padding: 10px 12px 8px;
   }

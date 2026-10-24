@@ -59,12 +59,16 @@
   const heroStatus = document.getElementById('hero-status-text');
   const heroDot = document.getElementById('hero-dot');
 
-  // heroText är den korta raden under rubriken på mobilen.
-  const show = (title, subtitle, note, isOpen, heroText) => {
+  // heroLines är raderna under rubriken på mobilen, t.ex. ["Öppet nu.", "Stänger 22.00 på fredagar"].
+  const show = (title, subtitle, note, isOpen, heroLines) => {
     status.textContent = title;
     todayHours.textContent = subtitle;
     closingNote.textContent = note;
-    heroStatus.textContent = heroText;
+    heroStatus.replaceChildren(...heroLines.map((text) => {
+      const line = document.createElement('span');
+      line.textContent = text;
+      return line;
+    }));
     dot.classList.toggle('is-open', isOpen);
     heroDot.classList.toggle('is-open', isOpen);
   };
@@ -76,19 +80,19 @@
     const next = nextOpening();
     const nextDay = nextOpenDay();
 
-    // Sista texten i varje show() är raden under rubriken, t.ex. "Öppet nu · stänger 22.00 på fredagar".
+    // Sista värdet i varje show() är raderna under rubriken på mobilen.
     if (!today) {
       show('Stängt idag', next ? `Öppnar ${next}` : '', 'Vi håller stängt idag.', false,
-        next ? `Stängt idag · öppnar ${next}` : 'Stängt idag');
+        next ? ['Stängt idag.', `Öppnar ${next}`] : ['Stängt idag.']);
     } else if (now.minute < today.open) {
       show(`Öppnar idag kl. ${format(today.open)}`, `Öppet idag ${format(today.open)}–${format(today.close)}`, `Stänger idag kl. ${format(today.close)}`, false,
-        `Stängt nu · öppnar ${format(today.open)} ${onDays(now.day)}`);
+        ['Stängt nu.', `Öppnar ${format(today.open)} ${onDays(now.day)}`]);
     } else if (now.minute < today.close) {
       show('Öppet nu', `Stänger ${format(today.close)} ${onDays(now.day)}`, `Stänger idag kl. ${format(today.close)}`, true,
-        `Öppet nu · stänger ${format(today.close)} ${onDays(now.day)}`);
+        ['Öppet nu.', `Stänger ${format(today.close)} ${onDays(now.day)}`]);
     } else {
       show(next ? `Öppnar ${next}` : 'Stängt', `Stängde idag kl. ${format(today.close)}`, `Stängde idag kl. ${format(today.close)}`, false,
-        nextDay ? `Stängt nu · öppnar ${format(nextDay.open)} ${onDays(nextDay.day)}` : 'Stängt');
+        nextDay ? ['Stängt nu.', `Öppnar ${format(nextDay.open)} ${onDays(nextDay.day)}`] : ['Stängt.']);
     }
   };
 
