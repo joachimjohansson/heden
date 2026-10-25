@@ -61,6 +61,22 @@
 
 /* 2. Grunder
    -------------------------------------------------------------------------- */
+/* Typsnittet ligger på sajten själv, så att texten inte väntar på Google Fonts.
+   Filen täcker latinska tecken inklusive å, ä, ö och é; andra tecken visas i
+   systemets typsnitt. Licens: SIL Open Font License. */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("assets/fonts/bricolage-grotesque-latin.woff2") format("woff2");
+}
+
+/* Bildramen för AVIF/WebP påverkar inte layouten; bilden beter sig som förut */
+picture {
+  display: contents;
+}
+
 * {
   box-sizing: border-box;
 }
