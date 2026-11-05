@@ -394,19 +394,19 @@
   white-space: nowrap;
 }
 
-/* Pluset efter priset */
+/* Pluset efter priset: ifylld röd cirkel med vitt plus */
 .memo-add {
   display: grid;
   flex: none;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   margin-left: 4px;
   padding: 0;
-  border: 1.5px solid var(--tomato);
+  border: 0;
   border-radius: 50%;
-  background: transparent;
-  color: var(--tomato);
+  background: var(--tomato);
+  color: white;
   cursor: pointer;
   align-self: center;
   transition: transform 0.12s ease-out, background 0.2s, color 0.2s;
@@ -417,7 +417,7 @@
   transition-duration: 0.08s;
 }
 
-/* Kort bekräftelse: pluset fylls i rött när rätten lagts till */
+/* Kort bekräftelse: pluset blir grönt när rätten lagts till */
 .memo-add.is-added {
   animation: memo-added 0.6s ease-out;
 }
@@ -425,15 +425,13 @@
 @keyframes memo-added {
   0%,
   60% {
-    background: var(--tomato);
-    color: white;
+    background: var(--heading);
   }
 }
 
 @media (hover: hover) {
   .memo-add:hover {
-    background: var(--tomato);
-    color: white;
+    background: var(--tomato-dark);
   }
 }
 
@@ -534,33 +532,6 @@
   margin-left: auto;
 }
 
-.memo-remove {
-  padding: 4px 0 4px 6px;
-  border: 0;
-  background: none;
-  color: var(--muted);
-  font: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-
-.memo-list fieldset {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 10px 0 0;
-  padding: 0;
-  border: 0;
-}
-
-.memo-list legend {
-  float: left;            /* rubriken på samma rad som valen */
-  width: 64px;
-  padding-top: 7px;
-  color: var(--muted);
-}
-
 /* Valen som små runda knappar; den valda fylls med grönt */
 .memo-chip {
   position: relative;
@@ -588,70 +559,137 @@
   outline-offset: 2px;
 }
 
-/* Tilläggen: en hopfälld rad som visar det man valt, med alla ingredienser i grupper */
-.memo-extras {
-  margin-top: 10px;
+/* Raden i minneslistan: namn och pris, valen under, och Ändra / Ta bort */
+.memo-choices {
+  margin: 4px 0 0;
+  color: var(--muted);
 }
 
-.memo-extras summary {
+.memo-item-actions {
+  display: flex;
+  gap: 18px;
+  margin-top: 4px;
+}
+
+.memo-link {
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* Fönstret där man anpassar en rätt */
+.memo-sub {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.memo-sub .memo-note {
+  margin: 0;
+}
+
+.memo-sub .dish-price {
+  margin-left: auto;
+}
+
+.memo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 16px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.memo-row legend,
+.memo-group-title {
+  margin: 0 0 8px;
+  padding: 0;
+  font-weight: 600;
+}
+
+.memo-group-title {
+  margin-top: 22px;
+}
+
+/* Grupperna med fler tillägg är hopfällda; raden visar hur många som är valda */
+.memo-group {
+  border-top: 1px solid var(--line);
+}
+
+.memo-group:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.memo-group summary {
   display: flex;
   align-items: center;
-  min-height: 36px;
+  gap: 10px;
+  min-height: 48px;
   cursor: pointer;
   list-style: none;
 }
 
-.memo-extras summary::-webkit-details-marker {
+.memo-group summary::-webkit-details-marker {
   display: none;
 }
 
-.memo-extras-label {
-  flex: none;
-  width: 64px;
-  color: var(--muted);
-}
-
-.memo-chosen {
-  flex: 1;
-  min-width: 0;
-  padding: 7px 13px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  background: var(--white);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Pilen visar att raden går att fälla ut */
-.memo-chosen::after {
+/* Pilen till höger visar att gruppen går att fälla ut */
+.memo-group summary::after {
   content: "";
-  float: right;
   width: 8px;
   height: 8px;
-  margin: 5px 2px 0 8px;
+  margin: -4px 4px 0 auto;
   border-right: 2px solid var(--muted);
   border-bottom: 2px solid var(--muted);
   transform: rotate(45deg);
-  transition: transform 0.2s;
 }
 
-.memo-extras[open] .memo-chosen::after {
-  margin-top: 9px;
+.memo-group[open] summary::after {
+  margin-top: 4px;
   transform: rotate(-135deg);
 }
 
-.memo-extras fieldset {
-  margin-top: 12px;
+.memo-count {
+  color: var(--heading);
+  font-weight: 600;
 }
 
-/* Gruppnamnen står på egen rad ovanför valen */
-.memo-extras legend {
-  float: none;
-  width: auto;
-  margin-bottom: 6px;
-  padding: 0;
-  font-weight: 600;
+.memo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 14px;
+}
+
+/* Knapparna ligger kvar längst ner i fönstret medan man scrollar bland tilläggen */
+.memo-footer {
+  position: sticky;
+  bottom: -24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 20px -24px -24px;
+  padding: 14px 24px 18px;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+
+.memo-footer .button {
+  border: 0;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.memo-footer .memo-clear {
+  margin: 0;
 }
 
 .memo-total {
@@ -703,10 +741,12 @@
     padding: 20px 16px;
   }
 
-  .memo-add {
-    width: 34px;
-    height: 34px;
+  .memo-footer {
+    bottom: -20px;
+    margin: 20px -16px -20px;
+    padding: 12px 16px 16px;
   }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
