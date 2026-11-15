@@ -395,8 +395,8 @@
   display: grid;
   flex: none;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   margin-left: 4px;
   padding: 0;
   border: 0;
@@ -405,7 +405,7 @@
   color: white;
   cursor: pointer;
   align-self: center;
-  transition: transform 0.12s ease-out, background 0.2s, color 0.2s;
+  transition: transform 0.12s ease-out, background 0.2s, color 0.2s, opacity 0.15s;
 }
 
 .memo-add:active {
@@ -425,7 +425,19 @@
   }
 }
 
+/* Med mus syns pluset bara när man pekar på rätten (eller tabbar till det);
+   på telefon syns det alltid, eftersom det inte går att hovra där */
 @media (hover: hover) {
+  .memo-add {
+    opacity: 0;
+  }
+
+  .dish-card:hover .memo-add,
+  .memo-add:focus-visible,
+  .memo-add.is-added {
+    opacity: 1;
+  }
+
   .memo-add:hover {
     background: var(--tomato-dark);
   }

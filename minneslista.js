@@ -20,13 +20,15 @@
   const ALIAS = { 'tomat': 'färsk tomat', 'färska tomater': 'färsk tomat', 'färsk mozzarella': 'mozzarella', 'vitlök': 'färsk vitlök',
     'färsk paprika': 'paprika', 'körsbärstomat': 'körsbärstomater', 'tryffel': 'tryffeltapenade' };
   const SAUCES = ['Mild', 'Stark', 'Blandad', 'Vitlök'];
+  // Delar av menyn (id på <section class="food-section">) som bara har de här tilläggen
+  const ONLY_EXTRAS = { kebab: ['Pommes frites'] };
   const KEY = 'hedens-minneslista';
 
   let items = [];
   try { items = JSON.parse(localStorage.getItem(KEY)) || []; } catch { items = []; }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch { /* privat läge: listan lever bara tills sidan stängs */ } };
 
-  const plusIcon = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+  const plusIcon = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
   const el = (tag, attrs = {}, ...children) => {
     const node = document.createElement(tag);
     Object.entries(attrs).forEach(([k, v]) => (k === 'html' ? (node.innerHTML = v) : node.setAttribute(k, v)));
@@ -39,8 +41,12 @@
   const extraLabel = (dish, extra) => (onDish(dish, extra) ? `Extra ${extra.toLowerCase()}` : extra);
   const sauceText = (sauce) => (sauce === 'Vitlök' ? 'vitlökssås' : `${sauce.toLowerCase()} sås`);
   const label = (item) => (item.nr ? `Nr ${item.nr} ${item.name}` : item.name);
+  // Det som går att välja bort; brödet och såsen väljs inte bort här (såsen har egna val)
+  const KEEP = ['pitabröd', 'tunnbröd', 'sås', 'kebabsås'];
+  const removable = (dish) => (dish.ingredients || []).filter((i) => !KEEP.includes(i));
   const choices = (item) => {
-    const text = [...item.extras.map((e) => extraLabel(item, e)), item.sauce && sauceText(item.sauce)].filter(Boolean).join(', ').toLowerCase();
+    const text = [...(item.without || []).map((w) => `utan ${w}`), ...item.extras.map((e) => extraLabel(item, e)),
+      item.sauce && sauceText(item.sauce)].filter(Boolean).join(', ').toLowerCase();
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
   const sum = () => items.reduce((acc, item) => acc + item.price, 0);
@@ -77,8 +83,17 @@
     return chip(box, text);
   };
 
+  const withoutBox = (name) => {
+    const box = el('input', { type: 'checkbox', value: name });
+    box.checked = draft.without.includes(name);
+    box.addEventListener('change', () => {
+      draft.without = removable(draft).filter((n) => (n === name ? box.checked : draft.without.includes(n)));
+    });
+    return chip(box, `Utan ${name}`);
+  };
+
   const openCustom = (dish, index = -1, added = null) => {
-    draft = { ...dish, extras: [...(dish.extras || [])], sauce: dish.sauce || '' };
+    draft = { ...dish, extras: [...(dish.extras || [])], without: [...(dish.without || [])], sauce: dish.sauce || '' };
     editIndex = index;
     onAdded = added;
     customTitle.textContent = label(dish);
@@ -93,6 +108,20 @@
         radio.addEventListener('change', () => { draft.sauce = name; });
         return chip(radio, name || 'Ingen');
       }));
+
+    const remove = removable(dish).length
+      ? [el('fieldset', { class: 'memo-row' }, el('legend', {}, 'Ta bort'), ...removable(dish).map(withoutBox))]
+      : [];
+
+    // Vissa delar av menyn har bara några få tillägg, t.ex. kebab och falafel: bara pommes
+    const only = ONLY_EXTRAS[dish.section];
+    if (only) {
+      customBody.replaceChildren(sauces, ...remove,
+        el('fieldset', { class: 'memo-row' }, el('legend', {}, 'Tillägg'), ...only.map((e) => extraBox(e, extraLabel(dish, e)))));
+      custom.showModal();
+      custom.scrollTop = 0;
+      return;
+    }
 
     const inDish = EXTRAS.filter((e) => onDish(dish, e));
     const more = inDish.length
@@ -113,16 +142,16 @@
       return details;
     });
 
-    customBody.replaceChildren(sauces, ...more,
+    customBody.replaceChildren(sauces, ...remove, ...more,
       el('p', { class: 'memo-group-title' }, 'Fler tillägg'), ...groups);
     custom.showModal();
     custom.scrollTop = 0;
   };
 
   confirmBtn.addEventListener('click', () => {
-    const { extras, sauce } = draft;
+    const { extras, without, sauce } = draft;
     if (editIndex < 0) items.push({ ...draft });
-    else items[editIndex] = { ...items[editIndex], extras, sauce };
+    else items[editIndex] = { ...items[editIndex], extras, without, sauce };
     save(); render();
     live.textContent = editIndex < 0 ? `${draft.name} tillagd i minneslistan` : `${draft.name} ändrad`;
     custom.close();
@@ -174,6 +203,7 @@
       price: parseInt(priceEl.textContent, 10),
       ingredientsText,
       ingredients: ingredientsText.toLowerCase().split(/,| och /).map((s) => s.trim()).filter(Boolean),
+      section: card.closest('.food-section')?.id || '',
     };
     const add = el('button', { type: 'button', class: 'memo-add', 'aria-label': `Lägg till ${dish.name} i minneslistan`, html: plusIcon });
     add.addEventListener('click', () => openCustom(dish, -1, () => {
