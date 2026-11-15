@@ -841,9 +841,15 @@ body::before {
     margin-top: 4px;
   }
 
+  /* Ringknappen ligger redan fast längst ner, så toppen visar bara "Se menyn" */
   .hero-actions {
+    justify-content: center;
     gap: 8px;
     margin-top: 21px;
+  }
+
+  .hero-actions .button-phone {
+    display: none;
   }
 
   .button {
