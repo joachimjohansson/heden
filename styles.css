@@ -43,7 +43,7 @@
   --card-salad: #ebdfcc;
 
   /* Typsnitt */
-  --font: "Bricolage Grotesque", system-ui, sans-serif;
+  --font: "Bricolage Grotesque", "Bricolage reserv", system-ui, sans-serif;
   --text-size: 17px;     /* brödtext och loggans namn */
   --h2-size: 45px;
   --h3-size: 28px;
@@ -70,6 +70,15 @@
   font-weight: 400 600;
   font-display: swap;
   src: url("assets/fonts/bricolage-grotesque-latin.woff2") format("woff2");
+}
+
+/* Reservtypsnittet medan Bricolage laddas: systemets typsnitt förstorat så att
+   x-höjden matchar (Bricolage ca 0,53, Segoe UI/Arial ca 0,50). Då hoppar inte
+   texten när det riktiga typsnittet kommer. Påverkar inte Bricolage självt. */
+@font-face {
+  font-family: "Bricolage reserv";
+  src: local("Segoe UI"), local("Arial");
+  size-adjust: 105%;
 }
 
 /* Bildramen för AVIF/WebP påverkar inte layouten; bilden beter sig som förut */

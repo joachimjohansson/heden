@@ -225,15 +225,15 @@
   padding: 0 var(--page-padding) 74px;
 }
 
-/* Hopp till en rubrik landar under flikraden (höjden sätts av menu.js) */
-/* Menydelarna landar precis under flikraden, så att flikraden alltid ligger
-   högst upp oavsett vilken del man hoppar till (annars hoppar den vid "Pizza") */
-.food-section {
-  scroll-margin-top: var(--tabs-height, 110px);
+/* Allt som scrollas fram, både hopp till rubriker och det man tabbar till,
+   landar under den fasta flikraden (höjden sätts av menu.js). Menydelarna
+   landar precis under den, så att flikraden alltid ligger högst upp. */
+html {
+  scroll-padding-top: var(--tabs-height, 110px);
 }
 
 .menu-group {
-  scroll-margin-top: calc(var(--tabs-height, 110px) + 12px);
+  scroll-margin-top: 12px;
 }
 
 .food-section {

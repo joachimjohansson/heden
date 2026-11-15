@@ -63,7 +63,7 @@
   const confirmBtn = el('button', { type: 'button', class: 'button button-primary' });
   const cancelBtn = el('button', { type: 'button', class: 'memo-clear' }, 'Avbryt');
   const customClose = el('button', { type: 'button', class: 'memo-close', 'aria-label': 'Stäng' }, '×');
-  const custom = el('dialog', { class: 'memo-dialog', 'aria-labelledby': 'custom-title' },
+  const custom = el('dialog', { class: 'memo-dialog', closedby: 'any', 'aria-labelledby': 'custom-title' },
     el('div', { class: 'memo-head' }, customTitle, customClose),
     el('div', { class: 'memo-sub' }, customIngredients, customPrice),
     customBody,
@@ -168,7 +168,7 @@
   const shareBtn = el('button', { type: 'button', class: 'button button-phone' }, 'Dela listan');
   const clearBtn = el('button', { type: 'button', class: 'memo-clear' }, 'Töm listan');
   const closeBtn = el('button', { type: 'button', class: 'memo-close', 'aria-label': 'Stäng minneslistan' }, '×');
-  const dialog = el('dialog', { class: 'memo-dialog', 'aria-labelledby': 'memo-title' },
+  const dialog = el('dialog', { class: 'memo-dialog', closedby: 'any', 'aria-labelledby': 'memo-title' },
     el('div', { class: 'memo-head' }, el('h2', { id: 'memo-title' }, 'Minneslista'), closeBtn),
     el('p', { class: 'memo-note' }, 'Ingen beställning skickas härifrån. Ring och läs upp numren, så står maten klar.'),
     list, total,
@@ -223,7 +223,16 @@
 
   bar.addEventListener('click', () => { render(); dialog.showModal(); });
   closeBtn.addEventListener('click', () => dialog.close());
-  [dialog, custom].forEach((d) => d.addEventListener('click', (e) => { if (e.target === d) d.close(); }));   // klick utanför rutan stänger
+  // Klick utanför rutan stänger den (closedby="any"). Webbläsare utan stöd, t.ex. Safari, får en
+  // reserv som kollar var klicket hamnade: ett klick på rutans kant räknas annars också som "utanför".
+  if (!('closedBy' in HTMLDialogElement.prototype)) {
+    [dialog, custom].forEach((d) => d.addEventListener('click', (e) => {
+      if (e.target !== d) return;
+      const r = d.getBoundingClientRect();
+      const inside = r.top <= e.clientY && e.clientY <= r.bottom && r.left <= e.clientX && e.clientX <= r.right;
+      if (!inside) d.close();
+    }));
+  }
   clearBtn.addEventListener('click', () => { items = []; save(); render(); dialog.close(); });
   shareBtn.addEventListener('click', async () => {
     const text = asText();
