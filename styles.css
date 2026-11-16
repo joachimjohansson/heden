@@ -36,6 +36,11 @@
   --icon-bg: #f0ebdf;      /* runda ikonbakgrunder */
   --open-green: #56865b;   /* prick när det är öppet */
   --closed-amber: #d79a3d; /* prick när det är stängt */
+  --accent-text: var(--tomato);             /* röd text: priser, länkar, "Pizzeria" */
+  --accent-text-strong: var(--tomato-dark); /* röd text ovanpå svepet */
+  --on-heading: white;     /* text och tecken på grön botten */
+  --card-text: #39473e;    /* text på menykorten */
+  --button-light: #faf7f0; /* ljus knapp, t.ex. telefonnumret */
 
   /* Bakgrund på de tre menykorten */
   --card-pizza: #e7d9bd;
@@ -56,6 +61,40 @@
   --page-padding: 56px;    /* luft till vänster och höger */
   --radius: 13px;          /* rundade hörn på kort */
   --shadow: 0 10px 30px #382b1208;
+
+  color-scheme: light dark;
+}
+
+/* Mörkt läge, när telefonen eller datorn står i mörkt läge. Bara färgerna byts;
+   allt annat på sidan är detsamma. Bakgrunden är en varm, mörk grönsvart ton,
+   texten sajtens krämvita, rubrikerna ljust salviagröna och röd text ljusare
+   så att priserna syns. Knapparna behåller sin röda färg. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #151d19;
+    --paper-dark: #1b2621;
+    --white: #1f2b25;
+    --ink: #ece6d9;
+    --heading: #a8cbb0;
+    --text-soft: #bdb8ac;
+    --muted: #aaa69b;
+    --olive: #93b596;
+    --swoosh: #1b2621;
+    --line: #34433b;
+    --line-soft: #29362f;
+    --icon-bg: #26342d;
+    --open-green: #7fb889;
+    --card-pizza: #3a2f20;
+    --card-kebab: #263329;
+    --card-salad: #352d20;
+    --shadow: 0 10px 30px #00000040;
+
+    --accent-text: #f08e78;
+    --accent-text-strong: #f08e78;
+    --on-heading: #10201a;
+    --card-text: #ddd6c8;
+    --button-light: #24322b;
+  }
 }
 
 
@@ -194,7 +233,7 @@ h1, h2, h3 {
 
 .button-phone {
   border: 1px solid var(--line);
-  background: #faf7f0;
+  background: var(--button-light);
 }
 
 
@@ -240,13 +279,13 @@ h1, h2, h3 {
 }
 
 .main-nav > a:hover {
-  color: var(--tomato);
+  color: var(--accent-text);
 }
 
 /* Textlänkar ("Se hela menyn", "Hitta vägen") ska se klickbara ut */
 .text-link,
 .all-menus-link {
-  color: var(--tomato);
+  color: var(--accent-text);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
@@ -291,7 +330,7 @@ h1, h2, h3 {
 /* "Pizzeria" i rubriken blir röd */
 .hero h1 em {
   font-style: normal;
-  color: var(--tomato);
+  color: var(--accent-text);
 }
 
 .intro {
@@ -460,7 +499,7 @@ body::before {
 }
 
 .info-card:hover b {
-  color: var(--tomato);
+  color: var(--accent-text);
   text-decoration-color: currentColor;
 }
 
@@ -491,7 +530,7 @@ body::before {
 
 .all-menus-link:hover,
 .text-link:hover {
-  color: var(--tomato-dark);
+  color: var(--accent-text-strong);
 }
 
 .menu-grid {
@@ -548,7 +587,7 @@ body::before {
 
 .menu-card p {
   margin: 0;
-  color: #39473e;
+  color: var(--card-text);
 }
 
 .menu-note {
@@ -577,18 +616,18 @@ body::before {
 .visit-copy p {
   max-width: 365px;
   margin: 0 0 15px;
-  color: #5a675f;
+  color: var(--text-soft);
 }
 
 /* Den mörkare bakgrunden här kräver den mörkare röda för att klara kontrastkravet */
 .visit-copy .text-link {
-  color: var(--tomato-dark);
+  color: var(--accent-text-strong);
 }
 
 .hours-card {
   padding: 24px 27px 20px;
   background: var(--white);
-  border: 1px solid #e3dccf;
+  border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
@@ -621,7 +660,7 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px solid #eee9df;
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .hours-row span {
@@ -639,7 +678,7 @@ body::before {
 }
 
 .hours-row.is-today b {
-  color: var(--tomato);
+  color: var(--accent-text);
 }
 
 .closing-note {

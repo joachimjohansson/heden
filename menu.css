@@ -43,7 +43,7 @@
 
 /* Mörkare röd, eftersom länken ligger ovanpå svepet */
 .menu-callout a {
-  color: var(--tomato-dark);
+  color: var(--accent-text-strong);
   font-weight: 600;
 }
 
@@ -65,8 +65,8 @@
 /* Flikraden är genomskinlig över svepet och får bakgrund först när den
    fastnat högst upp (klassen sätts av menu.js) */
 .menu-tabs.is-stuck {
-  background: #f6f1e7ee;
-  border-color: #e6dfd2;
+  background: color-mix(in srgb, var(--paper) 93%, transparent);
+  border-color: var(--line);
   backdrop-filter: blur(12px);
 }
 
@@ -108,7 +108,7 @@
   z-index: 1;                /* texten ligger över den gröna markeringen */
   padding: 10px 17px;
   border-radius: 99px;
-  color: #536058;
+  color: var(--text-soft);
   font-weight: 600;
   transition: transform 0.12s ease-out, background 0.2s, color 0.25s;
 }
@@ -146,7 +146,7 @@
 /* Vald flik i rubrikernas mörkgröna färg */
 .menu-tabs-main a.active {
   background: var(--heading);
-  color: white;
+  color: var(--on-heading);
 }
 
 /* Hovring bara på enheter med muspekare. En ljus grön ton, så att den inte
@@ -212,7 +212,7 @@
 }
 
 .menu-tabs-sub a.active {
-  color: var(--tomato);
+  color: var(--accent-text);
   text-decoration-color: currentColor;
 }
 
@@ -279,7 +279,7 @@ html {
 .dish-card {
   min-width: 0;
   padding: 14px 0 15px;
-  border-bottom: 1px solid #e9e3d8;
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .dish-heading {
@@ -290,7 +290,7 @@ html {
 
 .dish-number {
   min-width: 18px;
-  color: var(--tomato);
+  color: var(--accent-text);
   font-size: 18px;
 }
 
@@ -302,7 +302,7 @@ html {
 
 .dish-price {
   margin-left: auto;
-  color: var(--tomato);
+  color: var(--accent-text);
   font-size: 18px;
   font-weight: 600;
   white-space: nowrap;
@@ -310,7 +310,7 @@ html {
 
 .dish-card p {
   margin: 5px 0 0;
-  color: #667168;
+  color: var(--muted);
   line-height: 1.45;
 }
 
@@ -402,7 +402,7 @@ html {
   border: 0;
   border-radius: 50%;
   background: var(--heading);
-  color: white;
+  color: var(--on-heading);
   cursor: pointer;
   align-self: center;
   transition: transform 0.12s ease-out, background 0.2s, color 0.2s, opacity 0.15s;
@@ -560,7 +560,7 @@ html {
 .memo-chip:has(input:checked) {
   border-color: var(--heading);
   background: var(--heading);
-  color: white;
+  color: var(--on-heading);
 }
 
 .memo-chip:has(input:focus-visible) {
